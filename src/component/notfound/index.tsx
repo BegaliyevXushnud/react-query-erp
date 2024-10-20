@@ -1,6 +1,6 @@
 import  { useEffect } from 'react';
 import ReactGA from 'react-ga';
-import './error.css'; // Make sure to import your CSS file
+import './error.css'; 
 
 const NotFound = () => {
   // Initialize ReactGA
