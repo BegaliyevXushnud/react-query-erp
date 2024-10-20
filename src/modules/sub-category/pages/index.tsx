@@ -6,15 +6,15 @@ import SubCategoryModal from "./modal";
 import { Button, Tooltip, Popconfirm, Space } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { Table as GlobalTable, Loading } from "@component"; // Global Table import qilindi
+import { Table as GlobalTable, Loading } from "@component"; 
 import { ColumnsType } from "antd/es/table";
 import { ParamsType } from "@types";
 import { SubCategorType } from "../type";
 
 const SubCategory = () => {
   const [params, setParams] = useState<ParamsType>({
-    limit: 3, // Standart qiymat
-    page: 1, // Standart qiymat
+    limit: 3, 
+    page: 1, 
     search: "",
   });
 
@@ -59,7 +59,7 @@ const SubCategory = () => {
   };
 
   const handleTableChange = (pagination: { current?: number; pageSize?: number }) => {
-    const { current = 1, pageSize = params.limit } = pagination; // Standart qiymatlar
+    const { current = 1, pageSize = params.limit } = pagination; 
     setParams((prev) => ({
       ...prev,
       page: current,
@@ -79,7 +79,7 @@ const SubCategory = () => {
       title: "T/R",
       dataIndex: "index",
       render: (_text, _record, index) =>
-        index + 1 + ((params.page || 1) - 1) * (params.limit || 10), // Tekshiruvlar bilan
+        index + 1 + ((params.page || 1) - 1) * (params.limit || 10), 
     },
     {
       title: "Name",
@@ -129,16 +129,16 @@ const SubCategory = () => {
     <>
       <SubCategoryModal
         open={open}
-        handleClose={handleClose}
+        handleCancel={handleClose} // `handleCancel` bu yerda to'g'ri ishlatilmoqda
         update={updateData}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit} // `onSubmit` xususiyatini qo'shdik
       />
       <Button onClick={() => { setOpen(true); setUpdateData(null); }} type="primary">
         Create SubCategory
       </Button>
       <GlobalTable 
         columns={columns}
-        data={data?.data?.subcategories} // dataSource ni o'zgartirdik
+        data={data?.data?.subcategories} 
         pagination={{
           current: params.page,
           pageSize: params.limit,
@@ -146,7 +146,7 @@ const SubCategory = () => {
           showSizeChanger: true,
           pageSizeOptions: ["2", "5", "7", "10", "12"],
         }}
-        handleChange={handleTableChange} // handleChange ni o'zgartirdik
+        handleChange={handleTableChange}
       />
     </>
   );

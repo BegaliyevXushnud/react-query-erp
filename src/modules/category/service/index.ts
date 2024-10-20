@@ -22,7 +22,7 @@ export const createCategory = async (data:Category) => {
 // ============== Update ===============
 export const updateCategory = async (data:Category) => {
     const {id} = data;
-    delete data.id;
+   
     const response = await axiosInstance.patch(`category/update/${id}`,data)
     return response?.data
 }
