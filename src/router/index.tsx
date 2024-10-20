@@ -19,6 +19,7 @@ const BrandCategory = lazyWithDelay(() => import('../modules/brandcategory/pages
 const Ads = lazyWithDelay(() => import('../modules/ads/pages'));
 const Stock = lazyWithDelay(() => import('../modules/stock/pages'));
 const Settings = lazyWithDelay(() => import('../modules/settings/pages'));
+const SubCategory = lazyWithDelay(() => import('../modules/sub-category/pages'));
 import { Loading, NotFound } from "@component";
 
 const Index: React.FC = () => {
@@ -30,6 +31,7 @@ const Index: React.FC = () => {
                 <Route path="admin-layout" element={<AdminLayout />}>
                     <Route index element={<Product />} />
                     <Route path="category" element={<Category />} />
+                    <Route path="category/:categoryId/sub-category" element={<SubCategory />} />
                     <Route path="brands" element={<Brands />} />
                     <Route path="brands-category" element={<BrandCategory />} />
                     <Route path="ads" element={<Ads />} />

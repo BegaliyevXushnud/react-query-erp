@@ -8,8 +8,8 @@ import BrandCategory from './brandcategory/pages';
 import Ads from './ads/pages';
 import Stock from './stock/pages';
 import Settings from './settings/pages';
-
-export {
+import SubCategory from './sub-category/pages'
+ export {
     SignIn,
     SignUp,
     AdminLayout,
@@ -19,5 +19,6 @@ export {
     BrandCategory,
     Ads,
     Stock,
-    Settings
+    Settings,
+    SubCategory
 };
