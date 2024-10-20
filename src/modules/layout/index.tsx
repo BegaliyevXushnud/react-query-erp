@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -15,6 +15,7 @@ import { Button, Layout, Menu, theme, Modal, Space, Select, Tooltip } from 'antd
 import { Outlet, useLocation, NavLink, useNavigate } from 'react-router-dom';
 import Najotlogo from '../../assets/najot.png';
 import { removeAccessToken } from '../../utils/token-service'; 
+import Loading from '../../component/loadable'; // Ensure correct path for Loading
 
 const { Header, Sider, Content } = Layout;
 
@@ -25,7 +26,7 @@ const App: React.FC = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  const navigate = useNavigate();  // use navigate hook
+  const navigate = useNavigate();
 
   useEffect(() => {
     const index = admin.findIndex((item) => item.path === pathname);
@@ -37,7 +38,7 @@ const App: React.FC = () => {
   interface AdminType {
     content: string;
     path: string;
-    icon: React.ComponentType; // Updated type
+    icon: React.ComponentType;
   }
 
   const admin: AdminType[] = [
@@ -86,7 +87,7 @@ const App: React.FC = () => {
 
   const handleOk = () => {
     removeAccessToken(); 
-    navigate("/"); // Use navigate for redirection
+    navigate("/"); 
     setIsModalVisible(false);
   };
 
@@ -182,20 +183,21 @@ const App: React.FC = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          <Outlet />
+          <Suspense fallback={<Loading />}>
+            <Outlet />
+          </Suspense>
         </Content>
       </Layout>
       <Modal
-        title="Confirmation" // Consider keeping a consistent language
+        title="Confirmation"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Are you sure you want to log out?</p> {/* Updated for consistency */}
+        <p>Are you sure you want to log out?</p>
       </Modal>
     </Layout>
   );
 };
 
 export default App;
-  

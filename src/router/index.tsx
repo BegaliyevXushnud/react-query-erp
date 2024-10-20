@@ -3,7 +3,6 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import App from "../App";
 
 
-// Lazy load components with a 1-second delay
 const delay = (ms:any) => new Promise(resolve => setTimeout(resolve, ms));
 
 const lazyWithDelay = (importFunc:any) => {
@@ -43,11 +42,10 @@ const Index: React.FC = () => {
     );
 
     return (
-        <Suspense fallback={<Loading/>}>
+        <Suspense fallback={<Loading />}>
             <RouterProvider router={router} />
         </Suspense>
     );
-}
+};
 
-// Export the Index component
 export default Index;

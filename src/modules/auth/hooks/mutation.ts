@@ -7,29 +7,29 @@ import { Notification } from "../../../utils/notification";
 
 export function useSignInMutation(){
     return useMutation({
-        mutationFn:async (data:SignIn) => {
+        mutationFn: async (data: SignIn) => {
             const response = await signIn(data);
-            if(response.status !== 201) {
+            if (response.status !== 201) {
                 Notification('error', 'Sign In Failed', 'Please check your credentials.');
                 throw new Error('Sign in failed');
             }
-            return response
+            return response;
         },
-        onSuccess:(response) => {
-            const {access_token} = response.data.data.tokens;
+        onSuccess: (response) => {
+            const { access_token } = response.data.data.tokens;
             saveAccessToken(access_token);
-            Notification('success','Sign In Successful', 'Welcome back!');
+            Notification('success', 'Sign In Successful', 'Welcome back!');
             setTimeout(() => {
-               window.location.href=  '/admin-layout'
+                window.location.href = '/admin-layout'; // Check this path
             }, 1000);
-            
         },
         onError: (error) => {
+            console.error('Sign in error:', error); // More detailed logging
             Notification('error', error.message);
-          },
-    
-    })
+        },
+    });
 }
+
 
 export function useSignUpMutation(){
     return useMutation({
