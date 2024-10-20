@@ -20,8 +20,8 @@ export function useSignInMutation(){
             saveAccessToken(access_token);
             Notification('success','Sign In Successful', 'Welcome back!');
             setTimeout(() => {
-               window.location.href=  './admin-layout'
-            }, 2000);
+               window.location.href=  '/admin-layout'
+            }, 1000);
             
         },
         onError: (error) => {

@@ -12,7 +12,7 @@ import {
   LogoutOutlined
 } from '@ant-design/icons';
 import { Button, Layout, Menu, theme, Modal, Space, Select, Tooltip } from 'antd';
-import { Outlet, useLocation, NavLink } from 'react-router-dom';
+import { Outlet, useLocation, NavLink, useNavigate } from 'react-router-dom';
 import Najotlogo from '../../assets/najot.png';
 import { removeAccessToken } from '../../utils/token-service'; 
 
@@ -21,22 +21,23 @@ const { Header, Sider, Content } = Layout;
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { pathname } = useLocation();
-  const [selectedKeys, setSelectedKeys] = useState<string>('');
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const navigate = useNavigate();  // use navigate hook
 
   useEffect(() => {
     const index = admin.findIndex((item) => item.path === pathname);
     if (index !== -1) {
-      setSelectedKeys(index.toString());
+      setSelectedKeys([index.toString()]);
     }
   }, [pathname]);
 
   interface AdminType {
     content: string;
     path: string;
-    icon: React.ComponentType | string;
+    icon: React.ComponentType; // Updated type
   }
 
   const admin: AdminType[] = [
@@ -85,7 +86,7 @@ const App: React.FC = () => {
 
   const handleOk = () => {
     removeAccessToken(); 
-    window.location.href = "/";
+    navigate("/"); // Use navigate for redirection
     setIsModalVisible(false);
   };
 
@@ -110,27 +111,24 @@ const App: React.FC = () => {
             borderRadius: '50%',
             objectFit: 'cover',
             marginRight: collapsed ? 0 : '10px',
-          }} /> {!collapsed && (
+          }} /> 
+          {!collapsed && (
             <span style={{ fontSize: '18px', fontWeight: 'bold', color: 'white' }}>Najot</span>
           )}
         </div>
         <Menu
           theme="dark"
           mode="inline"
-          selectedKeys={[selectedKeys]}
-          items={admin.map((item, index) => ({
-            key: index.toString(),
-            icon: React.createElement(item.icon as React.ComponentType),
-            label: (
-              <NavLink
-                to={item.path}
-                className="text-white hover:text-white focus:text-white"
-              >
+          selectedKeys={selectedKeys}
+        >
+          {admin.map((item, index) => (
+            <Menu.Item key={index.toString()} icon={<item.icon />}>
+              <NavLink to={item.path} className="text-white hover:text-white focus:text-white">
                 {item.content}
               </NavLink>
-            ),
-          }))}
-        />
+            </Menu.Item>
+          ))}
+        </Menu>
       </Sider>
       <Layout>
         <Header style={{
@@ -155,8 +153,8 @@ const App: React.FC = () => {
               defaultValue="en"
               style={{ width: 120 }}
               options={[
-                { value: 'en', label: 'en' },
-                { value: 'uz', label: 'uz' },
+                { value: 'en', label: 'English' },
+                { value: 'uz', label: 'Uzbek' },
               ]}
             />
             <Tooltip title="Logout" placement="bottom">
@@ -188,15 +186,16 @@ const App: React.FC = () => {
         </Content>
       </Layout>
       <Modal
-        title="Tasdiqlash"
+        title="Confirmation" // Consider keeping a consistent language
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Hisobingizdan chiqmoqchimisiz?</p>
+        <p>Are you sure you want to log out?</p> {/* Updated for consistency */}
       </Modal>
     </Layout>
   );
 };
 
 export default App;
+  
