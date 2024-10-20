@@ -5,7 +5,7 @@ export interface RecordType {
 }
 // src/types/index.ts or another relevant file
 export interface Category {
-    id: string | number; // Adjust the type based on your actual data
+    id?: string | number;
     name: string;
   }
   
