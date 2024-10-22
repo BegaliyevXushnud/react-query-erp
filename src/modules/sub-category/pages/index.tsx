@@ -129,9 +129,9 @@ const SubCategory = () => {
     <>
       <SubCategoryModal
         open={open}
-        handleCancel={handleClose} // `handleCancel` bu yerda to'g'ri ishlatilmoqda
+        handleCancel={handleClose} 
         update={updateData}
-        onSubmit={handleSubmit} // `onSubmit` xususiyatini qo'shdik
+        onSubmit={handleSubmit} 
       />
       <Button onClick={() => { setOpen(true); setUpdateData(null); }} type="primary">
         Create SubCategory

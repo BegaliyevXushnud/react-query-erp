@@ -93,6 +93,7 @@ console.log("Params:", params);
 
   return (
     <>
+      <div className="flex flex-col gap-5">
       <Modal open={modalVisible} handleCancel={handleCancel} update={update} />
       <div className="flex justify-between p-">
         <Search params={params} setParams={setParams} />
@@ -113,6 +114,7 @@ console.log("Params:", params);
   handleChange={handleTableChange}
 />
 
+      </div>
     </>
   );
 };

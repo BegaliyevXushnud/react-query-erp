@@ -76,12 +76,13 @@ const Index = () => {
           </Tooltip>
           <ConfirmDelete id={record.id} deleteItem={(id: string | number) => mutate(id)} />
           <Tooltip title="Sub-category">
-            <Button
-              type="default"
-              onClick={() => navigate(`/admin-layout/category/${record.id}`)}
-              icon={<ArrowsAltOutlined />}
-            />
-          </Tooltip>
+    <Button
+        type="default"
+        onClick={() => navigate(`/admin-layout/category/sub-category/${record.id}`)} // Bu qator sub-kategoriya sahifasiga yo'naltirmoqda
+        icon={<ArrowsAltOutlined />}
+    />
+</Tooltip>
+
         </Space>
       ),
     },
@@ -89,7 +90,8 @@ const Index = () => {
 
   return (
     <>
-      <Modal open={modalVisible} handleCancel={handleCancel} update={update} />
+     <div className="flex flex-col gap-4">
+     <Modal open={modalVisible} handleCancel={handleCancel} update={update} />
       <div className="flex justify-between p-">
         <Search params={params} setParams={setParams} />
         <Button type="primary" className="btn" onClick={() => setModalVisible(true)}>
@@ -108,6 +110,7 @@ const Index = () => {
         }}
         handleChange={handleTableChange}
       />
+     </div>
     </>
   );
 };

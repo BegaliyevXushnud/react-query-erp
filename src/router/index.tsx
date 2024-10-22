@@ -31,7 +31,7 @@ const Index: React.FC = () => {
                 <Route path="admin-layout" element={<AdminLayout />}>
                     <Route index element={<Product />} />
                     <Route path="category" element={<Category />} />
-                    <Route path="category/:categoryId/sub-category" element={<SubCategory />} />
+                    <Route path="category/sub-category/:id" element={<SubCategory />} />
                     <Route path="brands" element={<Brands />} />
                     <Route path="brands-category" element={<BrandCategory />} />
                     <Route path="ads" element={<Ads />} />
