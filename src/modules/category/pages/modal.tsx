@@ -12,12 +12,12 @@ const ModalComponent = ({ open, handleCancel, update }: ModalPropType) => {
     useEffect(() => {
         if (open) {
             if (update) {
-                // Eski ma'lumotlarni formga yuklash
+                
                 form.setFieldsValue({
-                    name: update.name, // update ob'ektidagi to'g'ri maydonni belgilang
+                    name: update.name,
                 });
             } else {
-                // Yangilashda formni tozalash
+              
                 form.resetFields();
             }
         }
