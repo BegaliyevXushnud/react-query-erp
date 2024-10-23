@@ -3,7 +3,7 @@ import { Button, Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { EditOutlined, ArrowsAltOutlined } from "@ant-design/icons";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { useCategory } from "../hooks/queryies"; // E'tibor bering: 'queryies' to'g'ri yozilishi kerak
+import { useCategory } from "../hooks/queryies"; 
 import { useDeleteCategory } from "../hooks/mutations";
 import { Table, ConfirmDelete, Search } from "@component";
 import Modal from "./modal";

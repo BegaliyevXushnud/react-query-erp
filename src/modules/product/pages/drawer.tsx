@@ -44,7 +44,7 @@ const ProductDrawer = ({ open, handleCancel, update }: ModalPropType) => {
 
     const handleSubmit = (values: any) => {
         const selectedFile = file?.originFileObj || file;
-        if (!selectedFile) {
+        if (!selectedFile && !update) {  // Fayl yuklanishi yangi mahsulot yaratish uchun zarur
             form.setFields([
                 {
                     name: "file",
@@ -53,13 +53,17 @@ const ProductDrawer = ({ open, handleCancel, update }: ModalPropType) => {
             ]);
             return;
         }
+
         const formData = new FormData();
         formData.append("name", values.name);
         formData.append("price", values.price);
         formData.append("category_id", values.category_id);
         formData.append("brand_id", values.brand_id);
         formData.append("brand_category_id", values.brand_category_id);
-        formData.append("files", selectedFile);
+
+        if (selectedFile) {
+            formData.append("files", selectedFile); // Fayl faqat mavjud bo'lsa qo'shiladi
+        }
 
         createMutate(formData, {
             onSuccess: () => {
@@ -75,7 +79,7 @@ const ProductDrawer = ({ open, handleCancel, update }: ModalPropType) => {
     return (
         <>
             <Drawer
-                title="Create a new product"
+                title={update ? "Edit Product" : "Create a new product"} // Sarlavha edit rejimida o'zgaradi
                 width={720}
                 onClose={handleCancel}
                 open={open}
@@ -156,25 +160,28 @@ const ProductDrawer = ({ open, handleCancel, update }: ModalPropType) => {
                                 </Select>
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
-                            <Form.Item
-                                name="file"
-                                label="Image"
-                                rules={[{ required: true, message: 'Please upload an image' }]}
-                            >
-                                <Upload
-                                    onChange={handleFileChange}
-                                    beforeUpload={() => false} // Prevent auto-upload, handle manually
+                        {/* Fayl yuklashni faqat yangi mahsulot yaratishda ko'rsatamiz */}
+                        {!update && (
+                            <Col span={12}>
+                                <Form.Item
+                                    name="file"
+                                    label="Image"
+                                    rules={[{ required: true, message: 'Please upload an image' }]}
                                 >
-                                    <Button>Click to Upload</Button>
-                                </Upload>
-                            </Form.Item>
-                        </Col>
+                                    <Upload
+                                        onChange={handleFileChange}
+                                        beforeUpload={() => false} // Prevent auto-upload, handle manually
+                                    >
+                                        <Button>Click to Upload</Button>
+                                    </Upload>
+                                </Form.Item>
+                            </Col>
+                        )}
                     </Row>
                     <Row>
                         <Col span={24} style={{ textAlign: 'right' }}>
                             <Button type="primary" htmlType="submit">
-                                Submit
+                                {update ? "Update" : "Submit"} {/* Tugma matnini o'zgartirish */}
                             </Button>
                         </Col>
                     </Row>

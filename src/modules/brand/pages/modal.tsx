@@ -36,7 +36,7 @@ const ModalComponent = ({ open, handleCancel, update }: ModalPropType) => {
     let selectedFile = file;
     
     if (!file && update) {
-        selectedFile = null;
+        selectedFile = null;    
     }
 
     if (!selectedFile && !update) {

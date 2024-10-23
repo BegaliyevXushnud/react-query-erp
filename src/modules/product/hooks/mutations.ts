@@ -6,21 +6,24 @@ import { Notification } from "../../../utils/notification";
 
 // ============= Create ==============
 export function useCreateProduct(){
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
+
     return useMutation({
-        mutationFn:(data:Product) => createProduct(data),
-        onSuccess:(response)=>{
-            Notification("success", response?.message)
+        // Product o'rniga FormData kiritamiz
+        mutationFn: (data: FormData) => createProduct(data),
+        onSuccess: (response) => {
+            Notification("success", response?.message);
         },
-        onSettled:async(_,error)=> {
-            if(error){
-                Notification("error", error?.message)
-            }else{
-                await queryClient.invalidateQueries({queryKey:["product"]})
+        onSettled: async (_, error) => {
+            if (error) {
+                Notification("error", error?.message);
+            } else {
+                await queryClient.invalidateQueries({ queryKey: ["product"] });
             }
         }
-    })
+    });
 }
+
  
 
 // =========== Update ===============

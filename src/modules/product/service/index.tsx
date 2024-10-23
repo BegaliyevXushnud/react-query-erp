@@ -25,10 +25,16 @@ export const getBrandCategoryById = async (id:number | undefined) => {
     return response.data?.data
 }
 //======== Create ==============
-export const createProduct = async (data:Product) => {
-    const response = await axiosInstance.post("products/create", data);
-    return response?.data
-}
+// Product ni emas, FormData obyektini qabul qiladi
+export const createProduct = async (data: FormData) => {
+    const response = await axiosInstance.post("products/create", data, {
+        headers: {
+            "Content-Type": "multipart/form-data", // FormData yuborilayotganini ko'rsating
+        },
+    });
+    return response?.data;
+};
+
 
 // ============== Update ===============
 export const updateProduct = async (data:Product) => {

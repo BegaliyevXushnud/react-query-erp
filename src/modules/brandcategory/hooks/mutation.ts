@@ -9,7 +9,13 @@ export function useCreateBrandCategory() {
     const queryClient = useQueryClient();
     
     return useMutation({
-        mutationFn: (data: BrandCategoryType) => createBrandCategory(data), 
+        mutationFn: (data: BrandCategoryType) => {
+            const formData = new FormData();
+            formData.append("id", String(data.id));
+            formData.append("name", data.name);
+            formData.append("brand_id", String(data.brand_id));
+            return createBrandCategory(formData);
+        }, 
         onSuccess: (response) => {
             Notification("success", response?.message);
         },

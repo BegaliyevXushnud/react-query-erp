@@ -3,7 +3,7 @@ import { Button, Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { EditOutlined } from "@ant-design/icons";
 import { useSearchParams } from "react-router-dom";
-import { useProduct } from "../hooks/queryies"; // E'tibor bering: 'queryies' to'g'ri yozilishi kerak
+import { useProduct } from "../hooks/queryies";
 import { useDeleteProduct } from "../hooks/mutations";
 import { Table, ConfirmDelete, Search } from "@component";
 import Modal from "./drawer";
@@ -67,7 +67,7 @@ console.log("Params:", params);
     },
     {
       title: "Price",
-      dataIndex: "name",
+      dataIndex: "price",
     },
     {
       title: "Image",
