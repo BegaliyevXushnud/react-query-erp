@@ -11,11 +11,12 @@ import {
   AppstoreOutlined,
   LogoutOutlined
 } from '@ant-design/icons';
-import { Button, Layout, Menu, theme, Modal, Space, Select, Tooltip } from 'antd';
+import { Button, Layout, Menu, theme, Modal, Space, Select, Tooltip, notification } from 'antd';
 import { Outlet, useLocation, NavLink, useNavigate } from 'react-router-dom';
 import Najotlogo from '../../assets/najot.png';
 import { removeAccessToken } from '../../utils/token-service'; 
 import Loading from '../../component/loadable'; // Ensure correct path for Loading
+import { getAccessToken } from '../../utils/token-service'; // Import the getAccessToken function
 
 const { Header, Sider, Content } = Layout;
 
@@ -29,11 +30,20 @@ const App: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = getAccessToken(); // Get the access token
+    if (!token) {
+      notification.warning({
+        message: 'Access Denied',
+        description: 'You are being redirected to the login page.',
+      });
+      navigate('/'); // Redirect to the login page
+    }
+
     const index = admin.findIndex((item) => item.path === pathname);
     if (index !== -1) {
       setSelectedKeys([index.toString()]);
     }
-  }, [pathname]);
+  }, [pathname, navigate]);
 
   interface AdminType {
     content: string;

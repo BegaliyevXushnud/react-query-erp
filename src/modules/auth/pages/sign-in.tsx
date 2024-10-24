@@ -35,7 +35,7 @@ const SignInComponent = () => {
                 name="phone_number"
                 rules={[
                   { required: true, message: 'Please input your Phone number!' },
-                  { pattern: /^\+998 \d{2} \d{3} \d{2} \d{2}$/, message: 'Invalid phone number format!' }
+                  // { pattern: /^\+998 \d{2} \d{3} \d{2} \d{2}$/, message: 'Invalid phone number format!' }
                 ]}
               >
                 <Input
@@ -63,7 +63,7 @@ const SignInComponent = () => {
                   Log in
                 </Button>
                 <div className="mt-2 text-center">
-                  <a onClick={() => window.location.href='/'} className='text-[black]'>
+                  <a onClick={() => window.location.href='/sign-up'} className='text-[black]'>
                     Register now!
                   </a>
                 </div>

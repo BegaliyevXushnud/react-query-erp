@@ -125,8 +125,10 @@ const signUp = () => {
   Register
 </Button>
 
-                <div className="p-2 mt-2 text-center">
-                  Do you have an account?
+<div className="mt-2 text-center">
+                  <a onClick={() => window.location.href='/'} className='text-[black]'>
+                    Sign-in!
+                  </a>
                 </div>
               </Form.Item>
             </Form>
