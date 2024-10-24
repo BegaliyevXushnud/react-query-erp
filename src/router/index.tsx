@@ -2,24 +2,17 @@ import React, { lazy, Suspense } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import App from "../App";
 
-
-const delay = (ms:any) => new Promise(resolve => setTimeout(resolve, ms));
-
-const lazyWithDelay = (importFunc:any) => {
-    return lazy(() => delay(1000).then(importFunc));
-};
-
-const SignIn = lazyWithDelay(() => import('../modules/auth/pages/sign-in'));
-const SignUp = lazyWithDelay(() => import('../modules/auth/pages/sign-up'));
-const AdminLayout = lazyWithDelay(() => import('../modules/layout'));
-const Category = lazyWithDelay(() => import('../modules/category/pages'));
-const Product = lazyWithDelay(() => import('../modules/product/pages'));
-const Brands = lazyWithDelay(() => import('../modules/brand/pages'));
-const BrandCategory = lazyWithDelay(() => import('../modules/brandcategory/pages'));
-const Ads = lazyWithDelay(() => import('../modules/ads/pages'));
-const Stock = lazyWithDelay(() => import('../modules/stock/pages'));
-const Settings = lazyWithDelay(() => import('../modules/settings/pages'));
-const SubCategory = lazyWithDelay(() => import('../modules/sub-category/pages'));
+const SignIn = lazy(() => import('../modules/auth/pages/sign-in'));
+const SignUp = lazy(() => import('../modules/auth/pages/sign-up'));
+const AdminLayout = lazy(() => import('../modules/layout'));
+const Category = lazy(() => import('../modules/category/pages'));
+const Product = lazy(() => import('../modules/product/pages'));
+const Brands = lazy(() => import('../modules/brand/pages'));
+const BrandCategory = lazy(() => import('../modules/brandcategory/pages'));
+const Ads = lazy(() => import('../modules/ads/pages'));
+const Stock = lazy(() => import('../modules/stock/pages'));
+const Settings = lazy(() => import('../modules/settings/pages'));
+const SubCategory = lazy(() => import('../modules/sub-category/pages'));
 import { Loading, NotFound } from "@component";
 
 const Index: React.FC = () => {
